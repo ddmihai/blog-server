@@ -12,28 +12,28 @@ interface CustomSession extends Session {
 
 const getUserDataController = async (req: Request & { session: CustomSession }, res: Response) => {
     try {
-
-        // Reject if there is not sesision or no userId
-        if (!req.session || !req.session?.userId) returnReject(res);
-
+        // Check if userId is present in the session
+        if (!req.session?.userId) {
+            return res.status(401).json({ message: 'Unauthorized: User not authenticated' });
+        }
 
         // Get the user by id and without the password
         const userId = req.session.userId;
         const existingUser = await User.findById(userId).select('-password');
 
-        // If the user is not found, reject as unauthorized
-        if (!existingUser) returnReject(res);
+        // If the user is not found, send 404 Not Found
+        if (!existingUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
-
-
-        if (existingUser)
-            return res.status(200).json(existingUser);
+        // If everything is fine, return the user data
+        return res.status(200).json(existingUser);
+    } catch (error) {
+        console.error('Error:', error);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
+};
 
-    catch (error) {
-        return res.status(500).json(error);
-    }
-}
 
 
 

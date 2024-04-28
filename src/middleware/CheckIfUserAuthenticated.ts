@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from "express";
 
 const checkIfUserAuthenticated = (req: Request, res: Response, next: NextFunction) => {
     try {
+        console.log(req.session)
 
         if (!req.session.userId)
             return res.status(403).json({ message: 'Unauthorized' });

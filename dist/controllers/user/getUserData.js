@@ -16,20 +16,23 @@ const user_model_1 = __importDefault(require("../../models/user.model"));
 const getUserDataController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
-        // Reject if there is not sesision or no userId
-        if (!req.session || !((_a = req.session) === null || _a === void 0 ? void 0 : _a.userId))
-            returnReject(res);
+        // Check if userId is present in the session
+        if (!((_a = req.session) === null || _a === void 0 ? void 0 : _a.userId)) {
+            return res.status(401).json({ message: 'Unauthorized: User not authenticated' });
+        }
         // Get the user by id and without the password
         const userId = req.session.userId;
         const existingUser = yield user_model_1.default.findById(userId).select('-password');
-        // If the user is not found, reject as unauthorized
-        if (!existingUser)
-            returnReject(res);
-        if (existingUser)
-            return res.status(200).json(existingUser);
+        // If the user is not found, send 404 Not Found
+        if (!existingUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        // If everything is fine, return the user data
+        return res.status(200).json(existingUser);
     }
     catch (error) {
-        return res.status(500).json(error);
+        console.error('Error:', error);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
 });
 function returnReject(res) {
