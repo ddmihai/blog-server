@@ -54,6 +54,7 @@ app.use(session({
 import userRouter from './router/users.router';
 import categoryController from './router/categories.router';
 import blogRouter from './router/blog.touter';
+import { fstatSync } from 'fs';
 
 app.get('/', (req, res, next) => res.status(200).json({ message: 'Welcome' }));
 
@@ -68,6 +69,7 @@ app.use('/api', blogRouter);
 
 app.use('*', (req, res, next) => {
     console.log(`Requested URL: ${req.originalUrl}`);
+
     return res.status(404).json({
         message: 'The url you provided does not exists'
     })
