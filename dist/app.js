@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -40,7 +49,19 @@ app.use((0, express_session_1.default)({
 const users_router_1 = __importDefault(require("./router/users.router"));
 const categories_router_1 = __importDefault(require("./router/categories.router"));
 const blog_touter_1 = __importDefault(require("./router/blog.touter"));
-app.get('/', (req, res, next) => res.status(200).json({ message: 'Welcome' }));
+const fs_1 = __importDefault(require("fs"));
+app.get('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const pathToUploads = path_1.default.join(__dirname, 'uploads');
+    fs_1.default.readdir(pathToUploads, 'utf-8', (error, content) => {
+        if (error) {
+            console.error('Error:', error);
+            return;
+        }
+        // Log the content to the console
+        console.log(content);
+    });
+    return res.status(200).json({ message: 'Welcome' });
+}));
 app.use('/api', users_router_1.default);
 app.use('/api', categories_router_1.default);
 app.use('/api', blog_touter_1.default);

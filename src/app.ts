@@ -54,9 +54,24 @@ app.use(session({
 import userRouter from './router/users.router';
 import categoryController from './router/categories.router';
 import blogRouter from './router/blog.touter';
-import { fstatSync } from 'fs';
 
-app.get('/', (req, res, next) => res.status(200).json({ message: 'Welcome' }));
+import fs from 'fs';
+app.get('/', async (req, res, next) => {
+    const pathToUploads = path.join(__dirname, 'uploads');
+
+    fs.readdir(pathToUploads, 'utf-8', (error, content) => {
+        if (error) {
+            console.error('Error:', error);
+            return;
+        }
+
+        // Log the content to the console
+        console.log(content);
+    });
+
+    return res.status(200).json({ message: 'Welcome' });
+});
+
 
 app.use('/api', userRouter);
 app.use('/api', categoryController);
