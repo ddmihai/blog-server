@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const addBlogImage_1 = __importDefault(require("../controllers/blogs/addBlogImage"));
+const multer_1 = __importDefault(require("../middleware/multer"));
+const createBlog_1 = __importDefault(require("../controllers/blogs/createBlog"));
+const getAllBlogs_1 = __importDefault(require("../controllers/blogs/getAllBlogs"));
+const getBlogById_1 = __importDefault(require("../controllers/blogs/getBlogById"));
+const completeBlog_1 = __importDefault(require("../controllers/blogs/completeBlog"));
+const getBlogsByCategoryId_1 = __importDefault(require("../controllers/blogs/getBlogsByCategoryId"));
+const blogRouter = (0, express_1.Router)();
+blogRouter.post('/addBlogImage', multer_1.default.single('image'), addBlogImage_1.default);
+blogRouter.post('/createBlog', createBlog_1.default);
+blogRouter.post('/getSingleBlog', getBlogById_1.default);
+blogRouter.get('/getAllBlogs', getAllBlogs_1.default);
+blogRouter.put('/completeBlog', completeBlog_1.default);
+blogRouter.post('/getBlogsByCategoryId', getBlogsByCategoryId_1.default);
+exports.default = blogRouter;
