@@ -6,6 +6,7 @@ import getAllblogs from "../controllers/blogs/getAllBlogs";
 import getBlogByIdController from "../controllers/blogs/getBlogById";
 import completeBlog from "../controllers/blogs/completeBlog";
 import getBlogsByCategoryId from "../controllers/blogs/getBlogsByCategoryId";
+import editBlog from "../controllers/blogs/editBlog";
 const blogRouter = Router();
 
 
@@ -18,7 +19,7 @@ blogRouter.get('/getAllBlogs', getAllblogs);
 blogRouter.put('/completeBlog', completeBlog);
 
 blogRouter.post('/getBlogsByCategoryId', getBlogsByCategoryId);
-
+blogRouter.put('/editblog', editBlog);
 
 
 export default blogRouter;

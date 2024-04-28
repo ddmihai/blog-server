@@ -11,6 +11,7 @@ const getAllBlogs_1 = __importDefault(require("../controllers/blogs/getAllBlogs"
 const getBlogById_1 = __importDefault(require("../controllers/blogs/getBlogById"));
 const completeBlog_1 = __importDefault(require("../controllers/blogs/completeBlog"));
 const getBlogsByCategoryId_1 = __importDefault(require("../controllers/blogs/getBlogsByCategoryId"));
+const editBlog_1 = __importDefault(require("../controllers/blogs/editBlog"));
 const blogRouter = (0, express_1.Router)();
 blogRouter.post('/addBlogImage', multer_1.default.single('image'), addBlogImage_1.default);
 blogRouter.post('/createBlog', createBlog_1.default);
@@ -18,4 +19,5 @@ blogRouter.post('/getSingleBlog', getBlogById_1.default);
 blogRouter.get('/getAllBlogs', getAllBlogs_1.default);
 blogRouter.put('/completeBlog', completeBlog_1.default);
 blogRouter.post('/getBlogsByCategoryId', getBlogsByCategoryId_1.default);
+blogRouter.put('/editblog', editBlog_1.default);
 exports.default = blogRouter;
