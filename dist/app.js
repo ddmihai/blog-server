@@ -13,7 +13,7 @@ const path_1 = __importDefault(require("path"));
 */
 const cors_1 = __importDefault(require("cors"));
 app.use((0, cors_1.default)({
-    origin: ['http://localhost:3333'],
+    origin: ['http://localhost:3333', 'https://blog-frontend-22f440b476b9.herokuapp.com'],
     credentials: true
 }));
 app.use(express_1.default.json());

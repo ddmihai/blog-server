@@ -10,7 +10,7 @@ import path from 'path';
 */
 import cors from 'cors';
 app.use(cors({
-    origin: ['http://localhost:3333'],
+    origin: ['http://localhost:3333', 'https://blog-frontend-22f440b476b9.herokuapp.com'],
     credentials: true
 }));
 
