@@ -24,6 +24,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!match)
             return res.status(404).json({ message: 'Invalid credentials' });
         req.session.userId = existingUser._id;
+        req.session.save();
         return res.status(200).json({ message: 'Welcome back' });
     }
     catch (error) {

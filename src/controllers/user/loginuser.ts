@@ -20,6 +20,7 @@ const loginUser = async (req: Request, res: Response) => {
 
 
         (req.session as any).userId = existingUser._id;
+        req.session.save();
 
         return res.status(200).json({ message: 'Welcome back' });
     }
