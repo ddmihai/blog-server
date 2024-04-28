@@ -12,6 +12,10 @@ interface CustomSession extends Session {
 
 const getUserDataController = async (req: Request & { session: CustomSession }, res: Response) => {
     try {
+
+        console.log(req.session?.userId)
+        console.log(req.session)
+
         // Check if userId is present in the session
         if (!req.session?.userId) {
             return res.status(401).json({ message: 'Unauthorized: User not authenticated' });

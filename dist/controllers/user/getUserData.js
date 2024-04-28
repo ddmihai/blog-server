@@ -14,10 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_model_1 = __importDefault(require("../../models/user.model"));
 const getUserDataController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b;
     try {
+        console.log((_a = req.session) === null || _a === void 0 ? void 0 : _a.userId);
+        console.log(req.session);
         // Check if userId is present in the session
-        if (!((_a = req.session) === null || _a === void 0 ? void 0 : _a.userId)) {
+        if (!((_b = req.session) === null || _b === void 0 ? void 0 : _b.userId)) {
             return res.status(401).json({ message: 'Unauthorized: User not authenticated' });
         }
         // Get the user by id and without the password
