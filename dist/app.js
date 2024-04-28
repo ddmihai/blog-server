@@ -45,6 +45,7 @@ app.use('/api', users_router_1.default);
 app.use('/api', categories_router_1.default);
 app.use('/api', blog_touter_1.default);
 app.use('*', (req, res, next) => {
+    console.log(`Requested URL: ${req.originalUrl}`);
     return res.status(404).json({
         message: 'The url you provided does not exists'
     });
