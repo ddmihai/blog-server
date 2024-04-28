@@ -67,6 +67,7 @@ app.use('/api', blogRouter);
 
 
 app.use('*', (req, res, next) => {
+    console.log(`Requested URL: ${req.originalUrl}`);
     return res.status(404).json({
         message: 'The url you provided does not exists'
     })
