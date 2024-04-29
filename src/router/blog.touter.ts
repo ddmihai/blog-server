@@ -7,6 +7,7 @@ import getBlogByIdController from "../controllers/blogs/getBlogById";
 import completeBlog from "../controllers/blogs/completeBlog";
 import getBlogsByCategoryId from "../controllers/blogs/getBlogsByCategoryId";
 import editBlog from "../controllers/blogs/editBlog";
+import deleteImageController from "../controllers/blogs/deleteImage";
 const blogRouter = Router();
 
 
@@ -21,5 +22,6 @@ blogRouter.put('/completeBlog', completeBlog);
 blogRouter.post('/getBlogsByCategoryId', getBlogsByCategoryId);
 blogRouter.put('/editblog', editBlog);
 
+blogRouter.delete('/blogImage', deleteImageController)
 
 export default blogRouter;
